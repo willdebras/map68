@@ -35,29 +35,14 @@ Simply read in the file, tidy it, and plot it with geom\_polygon.
 ``` r
 
 library(geojsonio)
-#> Warning: package 'geojsonio' was built under R version 4.0.3
-#> 
-#> Attaching package: 'geojsonio'
-#> The following object is masked from 'package:base':
-#> 
-#>     pretty
 library(broom)
 library(sp)
 library(dplyr) #for pipes
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 
 spdf <- geojsonio::geojson_read("./elections_features.geojson",  what = "sp")
 
 
 spdf_fortified <- broom::tidy(spdf) %>% dplyr::filter(!id==1)
-#> Regions defined for each Polygons
 
 library(ggplot2)
 
@@ -67,7 +52,7 @@ ggplot() +
   coord_map()
 ```
 
-![](README_files/figure-gfm/cars-1.png)<!-- -->
+![](README_files/figure-gfm/plot-1.png)<!-- -->
 
 The plan is to set each polygon to have the state postal code to be
 easily bound to election data before the 2020 presidential election.
